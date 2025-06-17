@@ -20,6 +20,8 @@ const AdminWeddingList = () => {
       {loading ? (
         <p>Memuat data...</p>
       ) : (
+        <>
+        <a href={API_URL+'app/wedding-form'} className="btn btn-info hover:bg-gray-700 px-3 py-2 rounded mb-8">Tambah</a>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
           <table className="table">
             <thead className="">
@@ -28,7 +30,6 @@ const AdminWeddingList = () => {
                 <th className="border px-4 py-2 text-left">Pengantin</th>
                 <th className="border px-4 py-2 text-left">Tanggal</th>
                 <th className="border px-4 py-2 text-left">Template</th>
-                <th className="border px-4 py-2 text-left">Settings</th>
                 <th className="border px-4 py-2 text-left">Action</th>
               </tr>
             </thead>
@@ -37,18 +38,18 @@ const AdminWeddingList = () => {
                 <tr key={wedding.id}>
                   <td className="border px-4 py-2">{wedding.id}</td>
                   <td className="border px-4 py-2">
-                    {wedding.bride_name} & {wedding.groom_name}
+                    {wedding.nama_pria} & {wedding.nama_wanita}
                   </td>
                   <td className="border px-4 py-2">
                     {new Date(wedding.wedding_date).toLocaleDateString()}
                   </td>
                   <td className="border px-4 py-2">{wedding.wptemplateslug}</td>
                   <td className="border px-4 py-2">
-                    <pre className="text-sm whitespace-pre-wrap">
-                      {JSON.stringify(wedding.settings, null, 2)}
-                    </pre>
+                    <div className="flex flex-col">
+                        <a className="btn btn-outline btn-success" href={API_URL+"app/admin/wedding-viewer/"+wedding.id} target="_blank">lihat</a>
+                        <a className="btn btn-outline btn-warning" href={API_URL+"app/admin/wedding-edit/"+wedding.id} target="_blank">edit</a>
+                    </div>
                   </td>
-                  <td><a href={API_URL+"app/admin/wedding-viewer/"+wedding.id} target="_blank">lihat halaman</a></td>
                 </tr>
               ))}
               {weddings.length === 0 && (
@@ -61,6 +62,7 @@ const AdminWeddingList = () => {
             </tbody>
           </table>
         </div>
+        </>
       )}
     </div>
   );

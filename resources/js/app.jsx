@@ -9,6 +9,7 @@ import AdminWeddingList from './components/admin/AdminWeddingList';
 import Invitation from './components/guest/Invitation';
 import UndanganViewer from './components/admin/UndanganViewer';
 import MainLayout from './components/layouts/MainLayout';
+import UndanganEdit from './components/admin/UndanganEdit';
 
 const App = () => (
   <BrowserRouter basename="/app">
@@ -19,6 +20,7 @@ const App = () => (
             <Route path="/admin/wedding" element={<AdminWeddingList />} />
             <Route path="/invitation/:id" element={<Invitation />} />
             <Route path="/admin/wedding-viewer/:id" element={<UndanganViewer />} />
+            <Route path="/admin/wedding-edit/:id" element={<WeddingForm />} />
         </Routes>
     </MainLayout>
   </BrowserRouter>

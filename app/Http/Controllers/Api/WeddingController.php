@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
@@ -19,8 +20,8 @@ class WeddingController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'bride_name' => 'required|string',
-            'groom_name' => 'required|string',
+            'nama_pria' => 'required|string',
+            'nama_wanita' => 'required|string',
             'wedding_date' => 'required|date',
             'location' => 'required|string',
             'wptemplateslug' => 'nullable|string',
@@ -103,5 +104,19 @@ class WeddingController extends Controller
         }
 
         return response($content);
+    }
+
+    public function edit($id){
+        try{
+            $wedding = Wedding::where('id',$id)->firstOrfail();
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil diambil.',
+                'data' => $wedding
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Gagal mengambil data kategori produk: ' . $e->getMessage());
+            abort(500); // Atau sesuaikan dengan kebutuhan
+        }
     }
 }

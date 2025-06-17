@@ -16,9 +16,12 @@ const Sidebar = () => {
               <FiMenu />
             </button>
           <ul className="menu">
-            <li><a href={API_URL+'app/wedding-form'} className="flex flex-row hover:bg-gray-700 px-3 py-2 rounded"><FaCube />
+            <li><a href={API_URL+'app/admin/wedding'} className="flex flex-row hover:bg-gray-700 px-3 py-2 rounded"><FaCube />
             {isSidebarOpen && <span>List Wedding</span>}
           </a></li>
+          {/* <li><a href={API_URL+'app/wedding-form'} className="flex flex-row hover:bg-gray-700 px-3 py-2 rounded"><FaCube />
+            {isSidebarOpen && <span>Form Wedding</span>}
+          </a></li> */}
           </ul>
         </div>
       </div>
