@@ -75,12 +75,18 @@ class WeddingController extends Controller
             '{{bride_name}}',
             '{{groom_name}}',
             '{{wedding_date}}',
-            '{{location}}'
+            '{{time}}',
+            '{{location}}',
+            '{{link}}',
+            '{{title}}'
         ], [
             $wedding->nama_pria,
             $wedding->nama_wanita,
             \Carbon\Carbon::parse($wedding->wedding_date)->translatedFormat('d F Y'),
-            $wedding->location
+            $wedding->time,
+            $wedding->location,
+            $wedding->link,
+            $wedding->title
         ], $content);
 
         // Cek settings (jika ada)

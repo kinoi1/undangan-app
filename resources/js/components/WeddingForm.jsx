@@ -22,8 +22,10 @@ const [formData, setFormData] = useState({
     nama_pria: "",
     nama_wanita: "",
     wedding_date: "",
+    time: "",
     location: "",
     link: "",
+    title:"",
     settings: settings,
     wptemplateslug: ""
 });
@@ -95,8 +97,10 @@ useEffect(() => {
                 nama_pria: data.nama_pria || "",
                 nama_wanita: data.nama_wanita || "",
                 wedding_date: data.wedding_date || "",
+                time: data.time || "",
                 location: data.location || "",
                 link: data.link || "",
+                title: data.title || "",
                 settings: data.settings || settings,
                 wptemplateslug: data.wptemplateslug || ""
             }));
@@ -116,7 +120,7 @@ useEffect(() => {
           placeholder="Mempelai pria"
           value={formData.nama_pria}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded-lg"
           />
         </div>
         
@@ -128,19 +132,33 @@ useEffect(() => {
           placeholder="Mempelai wanita"
           value={formData.nama_wanita}
           onChange={handleChange}
-          className="border p-2 w-full"
+          className="border p-2 w-full rounded-lg"
           />
         </div>
         
-        <div>
-          <label className="block mb-2 font-medium">Tanggal</label>
-          <input
-          type="date"
-          name="wedding_date"
-          value={formData.wedding_date}
-          onChange={handleChange}
-          className="border p-2 w-full"
-          />
+        <div className="flex flex-row gap-4">
+          <div>
+            <label className="block mb-2 font-medium">Waktu</label>
+            <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            className="border p-2 rounded-lg"
+            />
+          </div>
+          
+          <div>
+            <label className="block mb-2 font-medium">Tanggal</label>
+            <input
+            type="date"
+            name="wedding_date"
+            value={formData.wedding_date}
+            onChange={handleChange}
+            className="border p-2 rounded-lg"
+            />
+          </div>
+          
         </div>
 
         <div>
@@ -150,17 +168,24 @@ useEffect(() => {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded-lg"
             />
         </div>
         <div className="flex flex-col">
           <label htmlFor="">Link undangan</label>
-          <div className="flex flex-row border">
-              <span class="border p-2 text-gray-500">https://undangan-online/</span>
-              <input className="flex-auto pl-2" type="text" placeholder="URL" 
+          <div className="flex flex-row border rounded-lg">
+              <span class="link p-2 text-gray-500">https://undangan-online/</span>
+              <input className="flex-auto pl-2 rounded-lg" type="text" placeholder="URL" 
               value={formData.link}
               onChange={handleChange}/>
           </div>
+        </div>
+        <div>
+            <label className="block mb-2 font-medium">Judul</label>
+            <input className="border p-2 w-full rounded-lg" type="text" name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
         </div>
       </div>
         

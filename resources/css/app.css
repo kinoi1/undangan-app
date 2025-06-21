@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.link{
+    border-right: 1px solid #fff;
+}
+input:focus-visible{
+    outline: unset;
+}
