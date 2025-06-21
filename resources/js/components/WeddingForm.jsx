@@ -23,6 +23,7 @@ const [formData, setFormData] = useState({
     nama_wanita: "",
     wedding_date: "",
     location: "",
+    link: "",
     settings: settings,
     wptemplateslug: ""
 });
@@ -95,6 +96,7 @@ useEffect(() => {
                 nama_wanita: data.nama_wanita || "",
                 wedding_date: data.wedding_date || "",
                 location: data.location || "",
+                link: data.link || "",
                 settings: data.settings || settings,
                 wptemplateslug: data.wptemplateslug || ""
             }));
@@ -105,40 +107,63 @@ useEffect(() => {
     }, [id]);
   return (
     <form onSubmit={handleSubmit} className="p-4 space-y-3 max-w-md mx-auto">
-        <label className="block mb-2 font-medium">Mempelai Pria</label>
-        <input
-        type="text"
-        name="nama_pria"
-        placeholder="Mempelai pria"
-        value={formData.nama_pria}
-        onChange={handleChange}
-        className="border p-2 w-full"
-        />
-        <label className="block mb-2 font-medium">Mempelai Wanita</label>
-        <input
-        type="text"
-        name="nama_wanita"
-        placeholder="Mempelai wanita"
-        value={formData.nama_wanita}
-        onChange={handleChange}
-        className="border p-2 w-full"
-        />
-        <label className="block mb-2 font-medium">Tanggal</label>
-        <input
-        type="date"
-        name="wedding_date"
-        value={formData.wedding_date}
-        onChange={handleChange}
-        className="border p-2 w-full"
-        />
-        <label className="block mb-2 font-medium">Lokasi</label>
-        <input
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-        className="border p-2 w-full"
-        />
+      <div className="flex flex-col gap-2">
+        <div>
+          <label className="block mb-2 font-medium">Mempelai Pria</label>
+          <input
+          type="text"
+          name="nama_pria"
+          placeholder="Mempelai pria"
+          value={formData.nama_pria}
+          onChange={handleChange}
+          className="border p-2 w-full"
+          />
+        </div>
+        
+        <div>
+          <label className="block mb-2 font-medium">Mempelai Wanita</label>
+          <input
+          type="text"
+          name="nama_wanita"
+          placeholder="Mempelai wanita"
+          value={formData.nama_wanita}
+          onChange={handleChange}
+          className="border p-2 w-full"
+          />
+        </div>
+        
+        <div>
+          <label className="block mb-2 font-medium">Tanggal</label>
+          <input
+          type="date"
+          name="wedding_date"
+          value={formData.wedding_date}
+          onChange={handleChange}
+          className="border p-2 w-full"
+          />
+        </div>
+
+        <div>
+            <label className="block mb-2 font-medium">Lokasi</label>
+            <input
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            className="border p-2 w-full"
+            />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="">Link undangan</label>
+          <div className="flex flex-row border">
+              <span class="border p-2 text-gray-500">https://undangan-online/</span>
+              <input className="flex-auto pl-2" type="text" placeholder="URL" 
+              value={formData.link}
+              onChange={handleChange}/>
+          </div>
+        </div>
+      </div>
+        
       <div className="">
         <label htmlFor="template" className="block mb-2 font-medium">Pilih Template</label>
         <select name="wptemplateslug" id="template" className="border p-2 rounded w-full" value={formData.wptemplateslug} onChange={handleChange}>

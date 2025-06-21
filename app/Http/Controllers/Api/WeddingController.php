@@ -24,6 +24,7 @@ class WeddingController extends Controller
             'nama_wanita' => 'required|string',
             'wedding_date' => 'required|date',
             'location' => 'required|string',
+            'link' => 'required|string|unique:weddings,link',
             'wptemplateslug' => 'nullable|string',
             'settings' => 'nullable|array', // validasi JSON sebagai array
             'settings.hideHeader' => 'nullable|boolean',
@@ -76,8 +77,8 @@ class WeddingController extends Controller
             '{{wedding_date}}',
             '{{location}}'
         ], [
-            $wedding->bride_name,
-            $wedding->groom_name,
+            $wedding->nama_pria,
+            $wedding->nama_wanita,
             \Carbon\Carbon::parse($wedding->wedding_date)->translatedFormat('d F Y'),
             $wedding->location
         ], $content);
@@ -115,8 +116,14 @@ class WeddingController extends Controller
                 'data' => $wedding
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Gagal mengambil data kategori produk: ' . $e->getMessage());
+            Log::error('Gagal mengambil data: ' . $e->getMessage());
             abort(500); // Atau sesuaikan dengan kebutuhan
         }
+    }
+    public function update(Request $request){
+        $request->validate([
+            'link' => 'required|string|unique:weddings,link,' . $id,
+        ]);
+
     }
 }
