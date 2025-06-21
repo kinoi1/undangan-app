@@ -5,6 +5,6 @@
 .link{
     border-right: 1px solid #fff;
 }
-input:focus-visible{
+input:focus-visible,textarea:focus-visible{
     outline: unset;
 }

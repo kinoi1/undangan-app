@@ -24,6 +24,7 @@ const [formData, setFormData] = useState({
     wedding_date: "",
     time: "",
     location: "",
+    address: "",
     link: "",
     title:"",
     settings: settings,
@@ -99,6 +100,7 @@ useEffect(() => {
                 wedding_date: data.wedding_date || "",
                 time: data.time || "",
                 location: data.location || "",
+                address: data.address || "",
                 link: data.link || "",
                 title: data.title || "",
                 settings: data.settings || settings,
@@ -169,6 +171,16 @@ useEffect(() => {
             value={formData.location}
             onChange={handleChange}
             className="border p-2 w-full rounded-lg"
+            />
+        </div>
+        <div>
+            <label className="block mb-2 font-medium">Alamat</label>
+            <textarea
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            className="border p-2 w-full rounded-lg"
+            placeholder="Alamat...."
             />
         </div>
         <div className="flex flex-col">

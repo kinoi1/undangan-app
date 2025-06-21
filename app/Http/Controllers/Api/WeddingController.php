@@ -30,7 +30,6 @@ class WeddingController extends Controller
             'settings.hideHeader' => 'nullable|boolean',
             'settings.hideBanner' => 'nullable|boolean',
             'settings.hideFooter' => 'nullable|boolean',
-
         ]);
 
        try {
@@ -77,14 +76,16 @@ class WeddingController extends Controller
             '{{wedding_date}}',
             '{{time}}',
             '{{location}}',
+            '{{address}}',
             '{{link}}',
-            '{{title}}'
+            '{{title}}',
         ], [
             $wedding->nama_pria,
             $wedding->nama_wanita,
             \Carbon\Carbon::parse($wedding->wedding_date)->translatedFormat('d F Y'),
             $wedding->time,
             $wedding->location,
+            $wedding->address,
             $wedding->link,
             $wedding->title
         ], $content);
