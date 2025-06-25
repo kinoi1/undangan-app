@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import API_URL from '../../utils/ApiUrl';
-import Sidebar from "../layouts/Sidebar";
 
 const AdminWeddingList = () => {
   const [weddings, setWeddings] = useState([]);

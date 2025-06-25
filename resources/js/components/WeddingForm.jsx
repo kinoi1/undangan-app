@@ -1,5 +1,5 @@
 // resources/js/components/WeddingForm.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getCsrfToken } from "../utils/csrf";
 import API_URL from '../utils/ApiUrl';
 import { useNavigate,useParams } from "react-router-dom";
@@ -50,7 +50,6 @@ const handleCheckbox = (e) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(formData),);
     try {
       const res = await fetch(`${API_URL}wedding`, {
         method: "POST",
@@ -111,53 +110,49 @@ useEffect(() => {
         .catch((err) => console.error("Error fetch:", err))
         .finally(() => setLoading(false));
     }, [id]);
+
+  const modalRef = useRef(null);
+
+  const openModal = () => {
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }else{
+      modalRef.current.hideModal();
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="p-4 space-y-3 max-w-md mx-auto">
       <div className="flex flex-col gap-2">
         <div>
           <label className="block mb-2 font-medium">Mempelai Pria</label>
-          <input
-          type="text"
-          name="nama_pria"
-          placeholder="Mempelai pria"
+          <input type="text" name="nama_pria" placeholder="Mempelai pria" className="border p-2 w-full rounded-lg"
           value={formData.nama_pria}
           onChange={handleChange}
-          className="border p-2 w-full rounded-lg"
           />
         </div>
         
         <div>
           <label className="block mb-2 font-medium">Mempelai Wanita</label>
-          <input
-          type="text"
-          name="nama_wanita"
-          placeholder="Mempelai wanita"
+          <input type="text" name="nama_wanita" placeholder="Mempelai wanita" className="border p-2 w-full rounded-lg"
           value={formData.nama_wanita}
           onChange={handleChange}
-          className="border p-2 w-full rounded-lg"
           />
         </div>
         
         <div className="flex flex-row gap-4">
           <div>
             <label className="block mb-2 font-medium">Waktu</label>
-            <input
-            type="time"
-            name="time"
+            <input type="time" name="time" className="border p-2 rounded-lg"
             value={formData.time}
             onChange={handleChange}
-            className="border p-2 rounded-lg"
             />
           </div>
           
           <div>
             <label className="block mb-2 font-medium">Tanggal</label>
-            <input
-            type="date"
-            name="wedding_date"
+            <input type="date" name="wedding_date" className="border p-2 rounded-lg"
             value={formData.wedding_date}
             onChange={handleChange}
-            className="border p-2 rounded-lg"
             />
           </div>
           
@@ -165,28 +160,22 @@ useEffect(() => {
 
         <div>
             <label className="block mb-2 font-medium">Lokasi</label>
-            <input
-            type="text"
-            name="location"
+            <input type="text" name="location" className="border p-2 w-full rounded-lg"
             value={formData.location}
             onChange={handleChange}
-            className="border p-2 w-full rounded-lg"
             />
         </div>
         <div>
             <label className="block mb-2 font-medium">Alamat</label>
-            <textarea
-            name="address"
+            <textarea name="address" className="border p-2 w-full rounded-lg" placeholder="Alamat...."
             value={formData.address}
             onChange={handleChange}
-            className="border p-2 w-full rounded-lg"
-            placeholder="Alamat...."
             />
         </div>
         <div className="flex flex-col">
           <label htmlFor="">Link undangan</label>
           <div className="flex flex-row border rounded-lg">
-              <span class="link p-2 text-gray-500">https://undangan-online/</span>
+              <span className="link p-2 text-gray-500">https://undangan-online/</span>
               <input className="flex-auto pl-2 rounded-lg" type="text" placeholder="URL" 
               value={formData.link}
               onChange={handleChange}/>
@@ -200,7 +189,11 @@ useEffect(() => {
             />
         </div>
       </div>
-        
+      <div>
+        <button className="btn btn-primary" onClick={openModal}>
+        Pilih template
+        </button>
+      </div>
       <div className="">
         <label htmlFor="template" className="block mb-2 font-medium">Pilih Template</label>
         <select name="wptemplateslug" id="template" className="border p-2 rounded w-full" value={formData.wptemplateslug} onChange={handleChange}>
@@ -214,30 +207,21 @@ useEffect(() => {
       <div className="space-y-2 flex flex-col gap-2">
         <div className="flex justify-between">
             <span>Header</span>
-            <input
-                className="toggle toggle-primary"
-                type="checkbox"
-                name="hideHeader"
+            <input className="toggle toggle-primary" type="checkbox" name="hideHeader"
                 checked={formData.settings?.hideHeader || false}
                 onChange={handleCheckbox}
             />
         </div>
         <div className="flex justify-between">
             <span>Banner</span>
-            <input
-                className="toggle toggle-primary"
-                type="checkbox"
-                name="hideBanner"
+            <input className="toggle toggle-primary" type="checkbox" name="hideBanner"
                 checked={formData.settings?.hideBanner || false}
                 onChange={handleCheckbox}
             />
         </div>
         <div className="flex justify-between">
             <span>Footer</span>
-            <input
-                className="toggle toggle-primary"
-                type="checkbox"
-                name="hideFooter"
+            <input className="toggle toggle-primary" type="checkbox" name="hideFooter"
                 checked={formData.settings?.hideFooter || false}
                 onChange={handleCheckbox}
             />
@@ -246,6 +230,44 @@ useEffect(() => {
       <button type="submit" className="bg-blue-600 text-white px-4 py-2">
         Submit
       </button>
+
+      <dialog id="my_modal_3" className="modal modal-middle" ref={modalRef}>
+        <div className="modal-box p-0">
+          <form method="dialog">
+            <div className="flex flex-row justify-between p-4">
+              <h3 className="font-bold text-lg">Tema</h3>
+              <button className="btn btn-sm btn-circle btn-ghost">
+                ✕
+              </button>
+            </div>
+            <div className="gray-line"></div>
+            <div className="container p-4 flex flex-col gap-2">
+              <label htmlFor="">Template</label>
+              <label className="w-full input">
+              <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <label htmlFor=""></label>
+              <input type="search" placeholder="Cari template..." />
+              </label>
+              <div className="flex flex-row flex-wrap gap-2">
+                <div className="template-box">tes</div>
+                <div className="template-box">tes</div>
+                <div className="template-box">tes</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </dialog>
     </form>
   );
 };

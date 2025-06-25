@@ -5,6 +5,17 @@
 .link{
     border-right: 1px solid #fff;
 }
-input:focus-visible,textarea:focus-visible{
+input:focus-visible,textarea:focus-visible,input:focus,input:focus-within,.input:focus-within{
     outline: unset;
+}
+.gray-line{
+    border-bottom: 1px solid #f5f5f5;
+}
+.p-0{
+    padding:0;
+}
+.template-box{
+    width: 200px;
+    height: 300px;
+    border:1px solid #fff;
 }

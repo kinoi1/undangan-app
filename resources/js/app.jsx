@@ -10,6 +10,8 @@ import Invitation from './components/guest/Invitation';
 import UndanganViewer from './components/admin/UndanganViewer';
 import MainLayout from './components/layouts/MainLayout';
 import UndanganEdit from './components/admin/UndanganEdit';
+import TemplateList from './components/admin/TemplateList';
+
 
 const App = () => (
   <BrowserRouter basename="/app">
@@ -21,6 +23,7 @@ const App = () => (
             <Route path="/invitation/:id" element={<Invitation />} />
             <Route path="/admin/wedding-viewer/:id" element={<UndanganViewer />} />
             <Route path="/admin/wedding-edit/:id" element={<WeddingForm />} />
+            <Route path="/admin/template-list" element={<TemplateList />} />
         </Routes>
     </MainLayout>
   </BrowserRouter>
