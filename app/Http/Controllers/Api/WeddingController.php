@@ -26,6 +26,7 @@ class WeddingController extends Controller
             'location' => 'required|string',
             'link' => 'required|string|unique:weddings,link',
             'wptemplateslug' => 'nullable|string',
+            'time'  => 'nullable|string',
             'settings' => 'nullable|array', // validasi JSON sebagai array
             'settings.hideHeader' => 'nullable|boolean',
             'settings.hideBanner' => 'nullable|boolean',
