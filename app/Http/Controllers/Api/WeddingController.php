@@ -129,9 +129,9 @@ class WeddingController extends Controller
         }
     }
     public function update(Request $request){
-        $request->validate([
-            'link' => 'required|string|unique:weddings,link,' . $id,
-        ]);
-
+        // $request->validate([
+        //     'link' => 'required|string|unique:weddings,link,' . $id,
+        // ]);
+        dd($request);
     }
 }

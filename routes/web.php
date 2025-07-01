@@ -24,6 +24,7 @@ Route::get('/api/render/{slug}', [InvitationRenderController::class, 'render']);
 Route::get('/templates', [TemplateController::class, 'index']);
 Route::get('/admin/wedding', [WeddingController::class, 'index']);
 Route::get('/admin/wedding/{id}', [WeddingController::class, 'edit']);
+Route::post('/admin/wedding/update/{id}', [WeddingController::class, 'update']);
 Route::post('/wedding', [WeddingController::class, 'store']);
 Route::get('/invitation/{id}', [WeddingController::class, 'invitationbyid']);
 Route::get('/wedding-viewer/{id}', [WeddingController::class, 'invitationbyid']);

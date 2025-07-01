@@ -72,6 +72,29 @@ const WeddingForm = () => {
     }
   };
 
+  const handleModal = async (e) => {
+    try {
+      console.log(e);
+      const formData = {
+        'id':e.id,
+        'slug':e.slug,
+        'title':e.title.rendered,
+        'type':'modal_template'
+      }
+      const res = await fetch(`${API_URL}admin/wedding/update/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": csrf
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      
+    }
+  };
+
   useEffect(() => {
     fetch(LinkWordpressList)
       .then(response => response.json())
@@ -274,9 +297,9 @@ const WeddingForm = () => {
                 onChange={(e) => setQuery(e.target.value)} />
             </label>
             <div className="flex flex-row flex-wrap gap-2 mt-2">
-              {filteredSearch.length > 0 ? (
-                filteredSearch.map((item, index) => (
-                  <div key={index} className="template-box">{item}</div>
+              {templates.length > 0 ? (
+                templates.map((item, index) => (
+                  <button type="button" key={index} className="template-box" data={item.slug} onClick={() => handleModal(item)}>{item.title.rendered}</button>
                 ))
               ) : (
                 <div>tidak ada data</div>
