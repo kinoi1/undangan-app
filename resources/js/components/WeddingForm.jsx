@@ -298,8 +298,8 @@ const WeddingForm = () => {
             </label>
             <div className="flex flex-row flex-wrap gap-2 mt-2">
               {templates.length > 0 ? (
-                templates.map((item, index) => (
-                  <button type="button" key={index} className="template-box" data={item.slug} onClick={() => handleModal(item)}>{item.title.rendered}</button>
+                templates.map((item) => (
+                  <button type="button" key={item.id} className="template-box" data={item.slug} onClick={() => handleModal(item)}>{item.title.rendered}</button>
                 ))
               ) : (
                 <div>tidak ada data</div>

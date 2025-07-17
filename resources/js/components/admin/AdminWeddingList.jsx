@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import API_URL from '../../utils/ApiUrl';
+import StepForm from "./StepForm";
 
 const AdminWeddingList = () => {
   const [weddings, setWeddings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("/admin/wedding")
@@ -20,7 +22,7 @@ const AdminWeddingList = () => {
         <p>Memuat data...</p>
       ) : (
         <>
-        <a href={API_URL+'app/wedding-form'} className="btn btn-info hover:bg-gray-700 px-3 py-2 rounded mb-8">Tambah</a>
+        <button onClick={() => setShowModal(true)} className="btn btn-info hover:bg-gray-700 px-3 py-2 rounded mb-8">Tambah</button>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
           <table className="table">
             <thead className="">
@@ -63,6 +65,7 @@ const AdminWeddingList = () => {
         </div>
         </>
       )}
+      <StepForm show={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 };

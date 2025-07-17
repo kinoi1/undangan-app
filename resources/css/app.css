@@ -19,3 +19,6 @@ input:focus-visible,textarea:focus-visible,input:focus,input:focus-within,.input
     height: 300px;
     border:1px solid #fff;
 }
+.h-inherit{
+    height: inherit;
+}
